@@ -21,11 +21,7 @@ import org.apache.kafka.common.utils.Bytes;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -105,6 +101,15 @@ public class SerializationTest {
                         str, deserializer.deserialize(topic, serializer.serialize(topic, str)));
             }
         }
+    }
+
+    @Test
+    public void listSerdeShouldShouldRoundtripInput() {
+        List<Integer> testData = Arrays.asList(1, 2, 3);
+        Serde<List<Integer>> listSerde = Serdes.ListSerde(Serdes.Integer());
+        assertEquals("Should get the original " + List.class +
+                        " after serialization and deserialization", testData,
+                listSerde.deserializer().deserialize(topic, listSerde.serializer().serialize(topic, testData)));
     }
 
     @Test(expected = SerializationException.class)

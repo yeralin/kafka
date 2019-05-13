@@ -259,4 +259,11 @@ public class Serdes {
     static public Serde<byte[]> ByteArray() {
         return new ByteArraySerde();
     }
+
+    /*
+     * A serde for nullable {@code List} type
+     */
+    public static <T> Serde<List<T>> ListSerde(Serde<T> innerSerde) {
+        return new ListSerde<T>(innerSerde);
+    }
 }

@@ -27,11 +27,7 @@ import org.apache.kafka.common.config.SecurityConfig;
 import org.apache.kafka.common.metrics.Sensor;
 import org.apache.kafka.common.serialization.Serializer;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 import static org.apache.kafka.common.config.ConfigDef.Range.atLeast;
 import static org.apache.kafka.common.config.ConfigDef.Range.between;
@@ -198,6 +194,12 @@ public class ProducerConfig extends AbstractConfig {
             + " <code>" + DELIVERY_TIMEOUT_MS_CONFIG + "</code> expires first before successful acknowledgement. Users should generally"
             + " prefer to leave this config unset and instead use <code>" + DELIVERY_TIMEOUT_MS_CONFIG + "</code> to control"
             + " retry behavior.";
+
+    /**
+     * <code>list.key.serializer.inner</code>
+     */
+    public static final String LIST_KEY_SERIALIZER_INNER_CLASS_CONFIG = "list.key.serializer.inner";
+    public static final String LIST_KEY_SERIALIZER_INNER_CLASS_DOC = "Inner serializer class for key that implements the <code>org.apache.kafka.common.serialization.Serializer</code> interface.";
 
     /** <code>key.serializer</code> */
     public static final String KEY_SERIALIZER_CLASS_CONFIG = "key.serializer";

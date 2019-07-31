@@ -27,7 +27,11 @@ import org.apache.kafka.common.config.SecurityConfig;
 import org.apache.kafka.common.metrics.Sensor;
 import org.apache.kafka.common.serialization.Serializer;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 import static org.apache.kafka.common.config.ConfigDef.Range.atLeast;
 import static org.apache.kafka.common.config.ConfigDef.Range.between;
@@ -199,7 +203,8 @@ public class ProducerConfig extends AbstractConfig {
      * <code>list.key.serializer.inner</code>
      */
     public static final String LIST_KEY_SERIALIZER_INNER_CLASS_CONFIG = "list.key.serializer.inner";
-    public static final String LIST_KEY_SERIALIZER_INNER_CLASS_DOC = "Inner serializer class for key that implements the <code>org.apache.kafka.common.serialization.Serializer</code> interface.";
+    public static final String LIST_KEY_SERIALIZER_INNER_CLASS_DOC = "Inner serializer class for key that implements the <code>org.apache.kafka.common.serialization.Serializer</code> interface."
+            + "This configuration will be read if and only if <code>key.serializer</code> configuration is set to <code>org.apache.kafka.common.serialization.ListSerializer</code>";
 
     /** <code>key.serializer</code> */
     public static final String KEY_SERIALIZER_CLASS_CONFIG = "key.serializer";
@@ -372,7 +377,11 @@ public class ProducerConfig extends AbstractConfig {
                                         null,
                                         new ConfigDef.NonEmptyString(),
                                         Importance.LOW,
-                                        TRANSACTIONAL_ID_DOC);
+                                        TRANSACTIONAL_ID_DOC)
+                .define(LIST_KEY_SERIALIZER_INNER_CLASS_CONFIG,
+                        Type.STRING,
+                        Importance.MEDIUM,
+                        LIST_KEY_SERIALIZER_INNER_CLASS_DOC);
     }
 
     @Override

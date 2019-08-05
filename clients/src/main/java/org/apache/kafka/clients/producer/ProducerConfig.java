@@ -378,10 +378,10 @@ public class ProducerConfig extends AbstractConfig {
                                         new ConfigDef.NonEmptyString(),
                                         Importance.LOW,
                                         TRANSACTIONAL_ID_DOC)
-                .define(LIST_KEY_SERIALIZER_INNER_CLASS_CONFIG,
-                        Type.STRING,
-                        Importance.MEDIUM,
-                        LIST_KEY_SERIALIZER_INNER_CLASS_DOC);
+                                .define(LIST_KEY_SERIALIZER_INNER_CLASS_CONFIG,
+                                        Type.CLASS,
+                                        Importance.MEDIUM,
+                                        LIST_KEY_SERIALIZER_INNER_CLASS_DOC);
     }
 
     @Override

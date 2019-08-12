@@ -264,6 +264,7 @@ public class Serdes {
             super(new ListSerializer<>(), new ListDeserializer<>());
         }
 
+        @SuppressWarnings(value = "unchecked")
         public ListSerde(Class listClass, Serde<T> serde) {
             super(new ListSerializer(serde.serializer()), new ListDeserializer<>(listClass, serde.deserializer()));
         }
